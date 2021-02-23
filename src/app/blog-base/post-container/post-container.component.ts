@@ -1,9 +1,10 @@
+import { Post } from './../post';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Post } from '../post';
 import { PostsService } from '../posts-service.service';
+import { tap, map, switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-container',
@@ -13,10 +14,13 @@ import { PostsService } from '../posts-service.service';
 export class PostContainerComponent implements OnInit {
   form!: FormGroup;
   post!: Observable<Post[]>;
+  idTest$!: any;
 
   constructor(
     private postService: PostsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -24,6 +28,22 @@ export class PostContainerComponent implements OnInit {
     //   .getPosts()
     //   .subscribe((item: any[]) => console.log(item));
     // console.log(this.post);
+
+    // this.postService.getId().subscribe(
+    //   (item) => item.map((value: any) => value),
+    //   (error) => console.error(error)
+    // );
+    let itemArray: any[] = [];
+    this.idTest$ = this.postService
+      .getId()
+      .pipe(
+        map((item) =>
+          item.map((item: any) => {
+            itemArray.push(item);
+          })
+        )
+      )
+      .subscribe((success) => console.log('Operação concluida'));
 
     this.form = this.formBuilder.group({
       img: [null],

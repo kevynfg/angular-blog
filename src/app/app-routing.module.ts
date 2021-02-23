@@ -3,18 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogBaseComponent } from './blog-base/blog-base.component';
 import { PostCardsComponent } from './blog-base/post-cards/post-cards.component';
 import { PostContainerComponent } from './blog-base/post-container/post-container.component';
+import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: BlogBaseComponent,
   },
   {
     path: 'posts',
     component: PostContainerComponent,
-    children: [
-      { path: ':post', pathMatch: 'full', component: PostCardsComponent },
-    ],
+  },
+  {
+    path: 'post/:id',
+    component: PostComponent,
   },
 ];
 

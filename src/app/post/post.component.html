@@ -1,0 +1,13 @@
+<div class="container" *ngIf="posts | async as post">
+  <h1>Posts mais recentes</h1>
+  <form
+    class="needs-validation"
+    novalidate
+    [formGroup]="form"
+    style="padding-top: 10px"
+  >
+    <div formControlName="title" id="title" class="form-control">
+      {{ post | json }}
+    </div>
+  </form>
+</div>

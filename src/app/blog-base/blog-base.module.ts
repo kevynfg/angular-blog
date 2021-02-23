@@ -1,3 +1,4 @@
+import { PostComponent } from './../post/post.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogBaseComponent } from './blog-base.component';
@@ -9,7 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [CommonModule, BlogRoutingModule, ReactiveFormsModule],
-  declarations: [BlogBaseComponent, PostCardsComponent, PostContainerComponent],
+  declarations: [
+    BlogBaseComponent,
+    PostCardsComponent,
+    PostContainerComponent,
+    PostComponent,
+  ],
   providers: [PostsService],
 })
 export class BlogBaseModule {}

@@ -11,6 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PostComponent } from './post/post.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
