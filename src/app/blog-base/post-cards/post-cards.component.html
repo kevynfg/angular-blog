@@ -1,0 +1,17 @@
+<div
+  class="card mb-3"
+  *ngFor="let post of posts | async"
+  [routerLink]="['/post', post.id]"
+>
+  <img src="..." class="card-img-top img-fluid" alt="Post background image" />
+  <div class="card-body">
+    <a class="card-title"
+      ><h5>{{ post.title }}</h5></a
+    >
+    <p class="card-text">
+      <small class="text-muted"
+        >Created at: {{ post.date | date: "fulltime" }}</small
+      >
+    </p>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Posts mais recentes</h1>
+  <form
+    class="needs-validation"
+    novalidate
+    [formGroup]="form"
+    style="padding-top: 10px"
+  >
+    <div class="col-md-12">
+      <label for="title" class="form-label">Título</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Digite um título para o post..."
+        formControlName="title"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="description" class="form-label">Descrição</label>
+      <textarea
+        type="text"
+        class="form-control description"
+        id="description"
+        placeholder="Digite aqui o que você está pensando."
+        formControlName="description"
+      ></textarea>
+      <div style="margin-top: 10px; margin-left: 15px"></div>
+    </div>
+    <div style="margin-top: 10px; margin-left: 15px"></div>
+  </form>
+
+  <button type="submit" style="margin-bottom: 1rem" (click)="onSubmit()">
+    Adicionar post
+  </button>
+  <app-post-cards [posts]="post"></app-post-cards>
+</div>

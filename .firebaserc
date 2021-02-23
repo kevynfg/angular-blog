@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-blog-6d70c": {
+      "hosting": {
+        "angular-blog": [
+          "angular-blog-6d70c"
+        ]
+      }
+    }
+  }
+}
