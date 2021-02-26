@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PostsService } from './../posts-service.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../post';
@@ -10,8 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./post-cards.component.scss'],
 })
 export class PostCardsComponent implements OnInit {
-  @Input() posts!: Observable<Post[]>;
-  @Input() newIndex!: string | any;
+  @Input() result$: Post[];
+  subscription: Subscription;
 
   constructor(
     private postService: PostsService,
@@ -19,11 +19,7 @@ export class PostCardsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.posts = this.postService.getPosts();
-    console.log(this.newIndex);
-    this.newIndex = this.postService.newIndex;
-  }
+  ngOnInit() {}
 
   onEdit(id: string) {
     this.router.navigate(['post', id]);

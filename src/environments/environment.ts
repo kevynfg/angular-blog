@@ -6,12 +6,14 @@ export const environment = {
   production: false,
   API: 'http://localhost:3000/',
   firebase: {
-    apiKey: 'AIzaSyCP1Duq4qVVTIMdKN1Sl5K8c29PvX5uxAE',
-    authDomain: 'angular-blog-6d70c.firebaseapp.com',
-    projectId: 'angular-blog-6d70c',
-    storageBucket: 'angular-blog-6d70c.appspot.com',
-    messagingSenderId: '240373859031',
-    appId: '1:240373859031:web:9d8ce1b92bc8f63e83e692',
+    apiKey: 'AIzaSyA-D3JdsLEoOOWoJRDpR95NDVhkvyZV6Hg',
+    authDomain: 'ng-angular-blog.firebaseapp.com',
+    databaseURL: 'https://ng-angular-blog-default-rtdb.firebaseio.com',
+    projectId: 'ng-angular-blog',
+    storageBucket: 'ng-angular-blog.appspot.com',
+    messagingSenderId: '71628625901',
+    appId: '1:71628625901:web:e2289a33aa9486cd2f79e4',
+    measurementId: 'G-2RHZB4C65V',
   },
 };
 

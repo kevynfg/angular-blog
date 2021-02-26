@@ -1,85 +1,68 @@
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from './post';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { map, pluck, switchMap, tap } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  postsCollection!: AngularFirestoreCollection<Post>;
-  posts$!: Observable<Post[]>;
-  newIndex!: Observable<any>;
-  index!: Observable<Post[]>;
-  indexCollection!: AngularFirestoreCollection<any>;
-
-  // createPost = this.store.collection('Post').valueChanges({ idField: 'id' });
+  posts$: Observable<any>;
+  postChanged$ = new Subject<any>();
   constructor(
-    private store: AngularFirestore,
+    private firebase: AngularFireDatabase,
     private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute
   ) {}
 
   getPosts() {
-    // return [
-    //   {
-    //     id: 1,
-    //     title: 'Hey',
-    //     description: 'Fala memo jou',
-    //     date: new Date(),
-    //   },
-    // ];
-    // this.postsCollection = this.store.collection('Posts');
-    // this.newIndex = this.postsCollection
-    //   .snapshotChanges()
+    // return this.http
+    //   .get('https://ng-angular-blog-default-rtdb.firebaseio.com/Posts.json')
     //   .pipe(
-    //     map((item) => item.map((item) => (this.newIndex = item.payload.doc.id)))
+    //     map((res) => {
+    //       Object.assign(postsArray, res);
+    //     }),
+    //     tap((res) => console.log(res))
     //   );
-    return (this.posts$ = this.postsCollection.valueChanges({ idField: 'id' }));
+    return this.http
+      .get<any[]>(
+        'https://ng-angular-blog-default-rtdb.firebaseio.com/Posts.json'
+      )
+      .pipe(tap(console.log));
+
+    // .subscribe((res: any) => Object.assign(postsArray, res));
   }
 
   addPost(form: any) {
-    return this.store.collection('Posts').add(form);
+    return this.http
+      .post(
+        'https://ng-angular-blog-default-rtdb.firebaseio.com/Posts.json',
+        form
+      )
+      .subscribe((response) => console.log('Post added', response));
   }
 
   randomImage(date: Date) {
     return `https://picsum.photos/200/300/?random&t=${date}`;
   }
 
-  getId(): Observable<any> {
-    this.postsCollection = this.store.collection('Posts');
-    // return this.postsCollection.snapshotChanges().pipe(
-    //   map((actions) =>
-    //     actions.map((a) => {
-    //       return (this.newIndex = a.payload.doc.id);
-    //     })
-    //   )
-    // );
-
-    // this.indexCollection = this.store.collection('Posts');
-    // return this.indexCollection
-    //   .snapshotChanges()
-    //   .pipe(map((item) => item.map((item) => item.payload.doc.id)));
-
-    return (this.newIndex = this.postsCollection.snapshotChanges().pipe(
-      map((actions) => {
-        return actions.map((a) => {
-          const data = a.payload.doc.data() as Post;
-          const id = a.payload.doc.id;
-          return { id, data };
-        });
-      })
-    ));
+  postsLength() {
+    return this.http
+      .get<AngularFireObject<any>>(
+        'https://ng-angular-blog-default-rtdb.firebaseio.com/Posts.json'
+      )
+      .subscribe((count: any) =>
+        console.log('Posts count', Object.values(count))
+      );
   }
 
-  getById(id: any): Observable<Post[]> {
-    return (this.index = this.postsCollection.valueChanges('Posts/' + id));
+  getJson() {
+    return this.http
+      .get<Post[]>('../../assets/data/data-test.json')
+      .pipe(map((res) => res));
   }
 }

@@ -9,6 +9,7 @@ import { BlogBaseModule } from './blog-base/blog-base.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PostComponent } from './post/post.component';
@@ -20,6 +21,7 @@ import { PostComponent } from './post/post.component';
     ModalModule.forRoot(),
     BlogBaseModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,

@@ -26,6 +26,7 @@ export class PostResolverGuard implements Resolve<Post> {
       title: null,
       description: null,
       date: null,
+      img: null,
     });
   }
 }

@@ -30,8 +30,14 @@
     <div style="margin-top: 10px; margin-left: 15px"></div>
   </form>
 
+  <div *ngFor="let item of result$ | async">
+    {{ item }}
+  </div>
+
   <button type="submit" style="margin-bottom: 1rem" (click)="onSubmit()">
     Adicionar post
   </button>
-  <app-post-cards [posts]="post"></app-post-cards>
+  <div>
+    <app-post-cards [result$]="result$ | async"></app-post-cards>
+  </div>
 </div>
